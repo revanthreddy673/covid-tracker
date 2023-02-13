@@ -24,7 +24,6 @@ export class ChartsComponent implements OnInit {
       return;
     }
 
-    console.log(this.dataService.statesList);
     this.stateNamesList = this.dataService.statesList;
 
     this.dataService.getStateWiseData().subscribe({
@@ -39,7 +38,6 @@ export class ChartsComponent implements OnInit {
             }
           }
         }
-        console.log(this.statesData);
         this.drawPieChart('confirmedChart');
         this.drawPieChart('deathsChart');
         this.drawPieChart('recoveredChart');
@@ -96,8 +94,6 @@ export class ChartsComponent implements OnInit {
       );
 
     let pie = d3.pie().sort(null);
-
-    console.log(pie(data));
 
     let arc = d3
       .arc()
@@ -163,7 +159,7 @@ export class ChartsComponent implements OnInit {
       .range([0, parseFloat(width) - 20])
       .padding(0.4);
 
-    let yScale = d3.scaleLinear().range([parseFloat(height) - 20, 0]);
+    let yScale = d3.scaleLinear().range([parseFloat(height) - 50, 0]);
 
     xScale.domain(
       data.map(function (d) {
@@ -179,7 +175,7 @@ export class ChartsComponent implements OnInit {
       d3.max(data, function (d) {
         return d.value;
       }) /
-      10,
+      20,
     ]);
 
     g.selectAll('.bar')
@@ -194,7 +190,11 @@ export class ChartsComponent implements OnInit {
       })
       .attr('width', xScale.bandwidth())
       .attr('height', function (d) {
-        return parseFloat(height) - 30 - yScale(d.value);
+        if (parseFloat(height) - yScale(d.value) > 30) {
+          return parseFloat(height) - 30 - yScale(d.value);
+        } else {
+          return parseFloat(height) - yScale(d.value);
+        }
       })
       .attr('fill', (d, i) => this.colors[i]);
 
