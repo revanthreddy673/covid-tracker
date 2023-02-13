@@ -1,0 +1,32 @@
+<div class="container">
+    <h2>Comparison Data of States</h2>
+    <div class="stateNames">
+        <div class="individualState" *ngFor="let name of stateNamesList; let i = index" title="{{ name }}">
+            <span class="colorSpan" [ngStyle]="getBorderForSpan(i)"></span>{{ name }}
+        </div>
+    </div>
+
+    <div class="homeButton" (click)="onHomeClick()">Home</div>
+
+    <div class="confirmedDiv">
+        <h3>Confirmed Cases</h3>
+        <div class="confirmedChart"></div>
+    </div>
+    <div class="deathsDiv">
+        <h3>Deaths</h3>
+        <div class="deathsChart"></div>
+    </div>
+    <div class="recoveredDiv">
+        <h3>Recovered</h3>
+        <div class="recoveredChart"></div>
+    </div>
+
+    <div class="slider" (click)="changeChartType()">
+        <span class="pietext highlight">Pie Chart</span>
+        <span class="imgSliderPie"><img alt="slider image" src="/assets/images/sliderpie.png" width="100%"
+                height="100%" /></span>
+        <span class="imgSliderBar"><img alt="slider image" src="/assets/images/sliderbar.png" width="100%"
+                height="100%" /></span>
+        <span class="bartext">Bar Chart</span>
+    </div>
+</div>

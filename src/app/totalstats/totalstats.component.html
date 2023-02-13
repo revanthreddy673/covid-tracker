@@ -1,0 +1,15 @@
+<div class="container" *ngIf="dataLoaded | async">
+    <div class="confirmed">
+        <p>Coronavirus Cases:</p>
+        <p>{{totalCases.confirmed}}</p>
+    </div>
+    <p class="stateData" (click)="viewStateData()">View by state</p>
+    <div class="deaths">
+        <p>Deaths:</p>
+        <p>{{totalCases.deaths}}</p>
+    </div>
+    <div class="recovered">
+        <p>Recovered:</p>
+        <p>{{totalCases.recovered}}</p>
+    </div>
+</div>

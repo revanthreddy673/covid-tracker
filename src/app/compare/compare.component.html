@@ -1,0 +1,27 @@
+<div class="container">
+    <app-alert [message]="errorMessage" *ngIf="errorMessage" (close)="onCloseAlert()"></app-alert>
+    <h2>
+        Please select a minimum of 2 states and maximum of 5 states to compare
+    </h2>
+    <div class="mainDivDropDown" tabindex="-1" (blur)="isdropDownOpen = false; setTopForCompare()">
+        <div class="dropDownDiv" (mousedown)="isdropDownOpen = !isdropDownOpen; setTopForCompare()">
+            <div class="displayValue" attr.title="{{ selectedValue }}">
+                {{ getShortName(selectedValue) }}
+            </div>
+            <div class="dropwDownImg" [attr.dropdownopen]="isdropDownOpen"></div>
+        </div>
+
+        <div class="dropdownOptions" *ngIf="isdropDownOpen" (mousedown)="$event.stopPropagation()">
+            <div class="statenamesDiv" *ngFor="let state of stateNames" (mousedown)="onCheckBoxClick(state)">
+                <div class="checkboxImg" attr.isselected="{{ state.selected }}"></div>
+                <div class="name" attr.title="{{ state.name }}">
+                    {{ getShortName(state.name) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="backButton" (click)="onClickHome()">Home</div>
+
+    <div class="compare" (click)="onClickCompare()">Compare</div>
+</div>
